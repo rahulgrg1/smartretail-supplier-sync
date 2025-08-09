@@ -1,0 +1,1 @@
+# smartretail-supplier-sync
