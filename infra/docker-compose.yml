@@ -15,3 +15,9 @@ services:
     restart: unless-stopped
     ports:
       - "4000:4000"
+
+  product-service:
+    build: ../product-service
+    container_name: product-service
+    restart: unless-stopped
+    ports: ["5000:5000"]
