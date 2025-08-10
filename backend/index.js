@@ -3,6 +3,14 @@ import bodyParser from 'body-parser';
 import { QueueClient } from '@azure/storage-queue';
 import { v4 as uuidv4 } from 'uuid';
 
+const API_KEY = process.env.API_KEY;
+app.use((req, res, next) => {
+  if (req.path === "/health" || req.method === "GET") return next();
+  const key = req.header("x-api-key");
+  if (!API_KEY || key === API_KEY) return next();
+  return res.status(401).json({ error: "Unauthorized" });
+});
+
 const app = express();
 app.use(bodyParser.json());
 const PORT = process.env.PORT || 3000;
